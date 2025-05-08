@@ -4,7 +4,8 @@ import {assets} from '../assets/assets'
 import { useAppContext } from '../context/AppContext'
 const Navbar= () => {
     const [open, setOpen]=useState(false)
-    const {user,setUser,setShowUserLogin,navigate,searchQuery,setSearchQuery}=useAppContext()
+    const {user,setUser,setShowUserLogin,navigate,searchQuery,
+        setSearchQuery,getCartCount}=useAppContext()
     const logout=async()=>{
         setUser(null);
         navigate('/');
@@ -35,7 +36,7 @@ const Navbar= () => {
                 
                 <div onClick={()=>navigate('/cart')} className='relative cursor-pointer'>
                 <img src={assets.cart_icon} className='w-6 opacity-80'/>
-                <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">3</button>
+                <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">{getCartCount()}</button>
                 </div>                
 
                 {!user ? (<button onClick={()=> setShowUserLogin(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
